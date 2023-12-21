@@ -1,0 +1,42 @@
+table thead th, table thead td {
+    font-size: 12px;
+    font-weight: bold;
+    color: #28516F;
+    text-align: center;
+    border-bottom: #5EA8C3 1px solid;
+    border-right: #5EA8C3 1px solid;
+    background: #DFF7FF;
+}
+
+table {
+    margin: 0 0 30px 0;
+    width: 100%;
+    border-top: #5EA8C3 2px solid;
+    border-bottom: #5EA8C3 1px solid;
+    background-color: #FFF;
+    font-size: 10px;
+    text-align: center;
+}
+
+table tbody th {
+    font-size: 10px;
+    font-weight: bold;
+    color: #07718f;
+    text-align: center;
+    border-top: #b1d5df 1px solid;
+    border-right: #b1d5df 1px solid;
+    background: #F7FFFE;
+}
+
+ul{
+    list-style : none;
+    display : flex;
+}
+
+li {
+    margin-right: 10px;
+}
+li a {
+    text-decoration: none;
+    cursor: pointer;
+}

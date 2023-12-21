@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>민원 수정</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/complaint/rivise.css}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.4.3/css/ol.css">
+    <script type="text/javascript"
+            src="https://map.vworld.kr/js/vworldMapInit.js.do?version=2.0&apiKey=E968F8D8-C4D0-33B0-8F1D-392239886745&domain=http://localhost:9191/"></script>
+    <link href="/css/infoFooter.css" rel="stylesheet" type="text/css">
+</head>
+<body style="margin-right: 20%; margin-left: 20%; padding: 0;">
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/">Home</a></li>
+                <li><a href="/HanRiverMap/info">지도 정보</a></li>
+                <li><a href="/complaint/main">민원 게시판</a></li>
+                <li><a href="/approval/main">용수 신청</a></li>
+                <li><a href="/notice/list">공지 사항</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div id="container">
+    <div id="title">
+        <h3>민원 수정</h3>
+    </div>
+    <form action="/complaint/revise" method="post">
+        [제목]<br>
+        <input type="text" th:value="${complaint.ctitle}" id="ctitle" name="ctitle">
+        <input type="hidden" id="c_loc" th:value="${complaint.c_loc}">
+        <input type="hidden" id="hidLoc" name="c_loc">
+        <br><br>
+        <input type="hidden" th:value="${complaint.cno}" name="cno">
+        [민원 소재지] :
+        <select name="loc1" id="loc1">
+            <option value="999">대분류</option>
+        </select>
+        <select name="loc2" id="loc2" disabled>
+            <option value="999" selected>소분류</option>
+        </select>
+        <br><br>
+        [내용]
+        <input type="text" th:value="${complaint.c_content}" id="c_content" name="c_content">
+        <br>
+        <div th:if="${fileList != null}">
+            <ul th:each="file : ${fileList}">
+                <li th:utext="|<strong>${file.ogFile_name}</strong> (약 ${file.file_size}MB)|"><input type="hidden"
+                                                                                                     class="fno"
+                                                                                                     th:value="${file.fno}">
+                </li>
+            </ul>
+        </div>
+        <br>
+        <input type="submit" id="revise" value="수정" style="width: 50px; height: 30px">
+        <button class="btn btn-danger" style="width: 50px; height: 30px; margin-bottom: 7px;" onclick="history.back()">취소</button>
+    </form>
+</div>
+
+
+<br>
+
+<div id="footer">
+
+    <div class="mnu">
+
+        <ul class="mn">
+            <li style="font-size: 12px"><a href="/web/guidePage/siteGuide.do">홈페이지 이용안내</a></li>
+            <li style="font-size: 12px"><a href="/web/guidePage/copyright.do">저작권 정책</a></li>
+            <li style="font-size: 12px" class="point"><a href="/web/guidePage/privacy.do">개인정보처리방침</a></li>
+            <li style="font-size: 12px"><a href="/web/guidePage/monitor.do">영상정보처리기기운영관리방침</a></li>
+            <li style="font-size: 12px"><a href="/web/guidePage/relationSite.do">관련사이트</a></li>
+            <li style="font-size: 12px"><a href="/web/guidePage/sitemap.do">사이트맵</a></li>
+            <li style="font-size: 12px"><a href="/web/aboutPage/location.do">찾아오시는길</a></li>
+        </ul>
+
+    </div>
+    <div class="main_tell_box_area">
+        <ul class="tel_padding">
+            <li class="tel_rmargin" style="display: inline-block;">대표전화 : 02 - 590 - 9999</li>
+            <li class="tel_rmargin" style="display: inline-block;">수문정보 자동응답 : 02 - 592 - 7700</li>
+            <li style="display: inline-block;">홍수통제 상황실(비상시 운영) : 02 - 590 - 9990 ~ 8</li>
+        </ul>
+    </div>
+    <div class="info">
+        <h3><a href="/"><img src="/assets/img/choongangLogo.png"></a></h3>
+        <ul style="width: 65%">
+            <li style="font-size: 12px">(06501) 서울특별시 서초구 동작대로 328 한강홍수통제소 | 대표전화 : 02-590-9999 | 수문정보자동응답(ARS) :
+                02-592-7700
+            </li>
+            <li style="font-size: 12px">본 홈페이지는 게시된 이메일주소가 자동 수집되는것을 거부하며 이를 위반시 정보통신망법에 의해 처벌됨을 유념하여 주시기 바랍니다.</li>
+            <li style="font-size: 12px">Copyright (c) Han River Flood Control Office, All Right reserved.</li>
+        </ul>
+    </div>
+
+</div>
+
+</body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script th:src="@{/js/complaint/revise.js}"></script>
+</html>

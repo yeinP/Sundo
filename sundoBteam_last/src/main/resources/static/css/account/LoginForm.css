@@ -1,0 +1,160 @@
+.container {
+    margin:auto;
+}
+.content {
+    margin: auto;
+}
+
+.loginBox {
+    margin: auto;
+    padding-top: 5%
+}
+
+.loginBox {
+    width : 450px;
+}
+
+.title1 {
+    text-align: center;
+    padding: 30px 10px 10px 10px;
+    margin: auto;
+    font-size:24px;
+    font-weight: 700;
+    color: #024abb;
+}
+
+.title2 {
+    text-align: center;
+    margin: auto;
+    padding: 20px 10px 10px 10px;
+    font-size:22px;
+    font-weight: 600;
+}
+
+.loginInner {
+    padding: 20px 28px;
+
+}
+
+.id_pwd .input_child:first-child {
+    border-radius: 6px 6px 0 0;
+    box-shadow: none;
+}
+.id_pwd #input_pwd{
+    border-radius: 0 0 6px 6px;
+}
+
+.id_pwd .input_child {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+    padding: 14px 17px 13px;
+    box-sizing: border-box;
+}
+
+.input_child {
+    position: relative;
+    display: block;
+    height: 100%;
+    border: 1px solid #dadada;
+    padding: 16px 18px 15px;
+    border-radius: 6px;
+    box-sizing: border-box;
+    text-align: left;
+    box-shadow: 0 2px 6px 0 rgba(68,68,68,.08);
+}
+
+.input_child+.input_child {
+    margin-top: -1px;
+}
+
+.input_text {
+    display: table-cell;
+    padding-right: 30px;
+    position: relative;
+    display: block;
+    width: 100%;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19px;
+    letter-spacing: -.5px;
+    color: #222;
+    box-sizing: border-box;
+    z-index: 4;
+}
+
+input {
+    border-radius: 0;
+    border: none;
+    background: 0 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: 0;
+    text-decoration: none;
+    cursor: pointer;
+    -webkit-text-size-adjust: none;
+}
+
+.btn-primary {
+    background-color: #024abb;
+    border-color: #024abb;
+    height: 50px;
+    /*width: 100%;*/
+}
+.form-check {
+    padding: 7px 25px;
+}
+
+.d-grid {
+    margin: 30px 0 20px 0;
+
+}
+
+.loginFooter {
+    padding-top: 15px;
+    margin: auto;
+    width:  450px;
+    text-align: center;
+}
+
+ul {
+    margin: auto;
+    list-style: none;
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: -20px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+
+}
+
+li {
+    position: relative;
+    display: inline-block;
+    text-align: -webkit-match-parent;
+}
+
+li+li {
+    padding-left: 28px;
+}
+
+a {
+    text-decoration: none;
+    color: #515152;
+    cursor: pointer;
+}
+
+li+li::before {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 12px;
+    width: 1px;
+    height: 20px;
+    border-radius: .5px;
+    background-color: #dadada;
+}
+
+

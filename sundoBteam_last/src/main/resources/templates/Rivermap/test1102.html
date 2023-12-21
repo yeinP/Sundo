@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.4.3/css/ol.css">
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://map.vworld.kr/js/vworldMapInit.js.do?version=2.0&apiKey=E968F8D8-C4D0-33B0-8F1D-392239886745&domain=http://localhost:63342/"></script>
+<!--    <script src="https://api.hrfco.go.kr/52832662-D130-4239-9C5F-730AD3BE6BC6/waterlevel/info.json"></script>-->
+<!--    <script src = "https://api.hrfco.go.kr/52832662-D130-4239-9C5F-730AD3BE6BC6/waterlevel/list/10M/1007697/202311031910/202311041950.xml>"-->
+    <title>OpenLayers-vworld</title>
+</head>
+<body>
+<div id="vmap" style="width:500px;height:370px;left:0px;top:0px"></div>
+<button id="seoul_river">서울 하천</button>
+<button id="gyeonggi_river">경기 하천</button>
+<button id="seoul_drainage">서울 수계</button>
+<button id="gyeonggi_drainage">경기 수계</button>
+<button type="button" onclick="javascript:setMode(vw.ol3.BasemapType.PHOTO_HYBRID);">하이브리드</button>
+<button type="button" onclick="javascript:setMode(vw.ol3.BasemapType.PHOTO);">항공사진</button>
+<script th:src="@{/js/RiverMap/VworldMap.js}"></script>
+</body>
+</html>

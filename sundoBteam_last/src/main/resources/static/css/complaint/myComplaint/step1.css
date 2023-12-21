@@ -1,0 +1,424 @@
+#container {
+    margin :auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+}
+
+#container > div {
+    text-align: center;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#title {
+    margin: auto;
+}
+#title h3 {
+    float: left;
+    margin: 31px 0 0 0;
+    padding: 0 9px 0 9px;
+    height: 33px;
+    font-size: 21px;
+    font-weight: bold;
+    color: #0368ce;
+    border-bottom: #0368ce 1px solid;
+}
+
+#contentDetail{
+    clear: both;
+}
+
+#content {
+    clear: both;
+    position: relative;
+    padding: 1px 0 92px 0;
+    width: 665px;
+    min-height: 570px;
+    z-index: 1;
+    margin: auto;
+}
+
+.titBox {
+    margin-top: 5px;
+    padding: 10px 15px;
+    background: #f4f5f9;
+    border-top: 1px solid #c4c9ce;
+}
+.titBox h4 {
+    font-size: 12px;
+    margin: auto;
+}
+#agreeTxt {
+    margin-top:20px;
+}
+
+.agr_box .agr_pt dl dt, .agr_box .agr_pt dl dd {
+    margin-bottom: 5px;
+    word-break: keep-all;
+}
+.agr_box .agr_pt ul li {
+    margin-bottom: 8px;
+    line-height: 12px;
+    word-break: keep-all;
+}
+.agr_box .agr_pt {
+    font-size:10px;
+    border-bottom: 1px solid #000;
+    padding: 10px;
+    height: 150px;
+    overflow-y: auto;
+    line-height: 18px;
+}
+
+.agr_box .agr_pt dl:first-child {
+    margin-top: 0;
+}
+
+dd {
+    display: block;
+    margin-inline-start: 40px;
+}
+
+
+.agree_sel {
+    font-weight: bolder;
+    margin: 10px 0 20px;
+    text-align: center;
+    font-size:12px;
+}
+
+#agree {
+    vertical-align: -3px;
+    margin-right: 5px;
+    font-size: 13px;
+
+}
+
+.alert {
+    padding-left: 10px;
+    height: 39px;
+    font-weight: bold;
+    font-size : 12px;
+    color: #0368ce;
+}
+
+.phoneNum {
+    display: inline-block;
+    margin-top: 5px;
+    text-align: center;
+    margin-bottom: 1px;
+}
+
+.phoneNum li {
+    overflow: hidden;
+    float : left;
+}
+
+.sign {
+    text-align: center;
+    margin-top: 20px;
+}
+.sign .inputNum {
+    text-align: center;
+    letter-spacing: 8px;
+    height: 50px;
+    padding: 3px 3px 0;
+    background: #fff;
+}
+
+.sign .inputNum input {
+    border: 1px solid gainsboro;
+    text-align: -webkit-center;
+    height: 30px;
+    width: 70px;
+    font-size: 12px;
+    color: #9d9d9d;
+}
+
+.sign .send  {
+    text-align: center;
+    height: 50px;
+    padding: 5px 5px 0;
+    background: #fff;
+
+}
+
+.sign .send #send, #check {
+    border: 1px solid darkgray;
+    text-align: center;
+    height: 33px;
+    width: 100px;
+    font-size: 12px;
+    color: #000;
+}
+
+#signNum {
+    border: 1px solid gainsboro;
+    height: 30px;
+    color: #9d9d9d;
+    text-align: -webkit-center;
+    font-size: 12px;
+    width: 245px;
+    margin-right: 9px;
+}
+.checkCo {
+    display: inline-block;
+    margin-top: 5px;
+    text-align: center;
+}
+
+.checkCo li {
+    list-style: none;
+    overflow: hidden;
+    float : left;
+}
+
+#nextBtn submit {
+    margin-top: 50px;
+    border: 1px solid darkgray;
+    text-align: center;
+    height: 33px;
+    /* margin: auto; */
+    width: 250px;
+    font-size: 12px;
+    color: #fff;
+    background-color: #003b90;
+}
+
+.title {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.searchWrap {
+    margin: 0 20px 0 20px;
+    display:block;
+    position: relative;
+    flex-direction: row; /* 기본값이 가로로 정렬이므로 생략 가능 */
+    align-items: center;
+    text-align: center;
+    background: #fafafa;
+    border: 1px solid #dddddd;
+    padding: 10px 0;
+    margin-bottom: 30px;
+}
+
+form {
+    display: block;
+}
+
+input[type='text'], input[type='date'], select[id='period'], input[type='submit'] {
+    height: 30px;
+    -webkit-appearance: none;
+    -webkit-border-radius: 0;
+    padding: 0 10px 0 10px;
+    font-size: 12px;
+    border: 1px solid #dddddd;
+    text-align: center;
+}
+input[type='date'] #date1 {
+    width: 30%;
+    margin-right: 2px;
+    margin-left: 2px;
+
+}
+
+input[type='date'] #date2 {
+    width: 100px;
+    margin-left: 2px;
+
+}
+select[id='period'] {
+    height: 32px;
+    margin-left: -3px;
+}
+
+input[type='text'] {
+    width: 50%;
+
+}
+
+input[type="submit"] {
+    width: 100px;
+    height: 31px;
+    margin-left: -3px;
+    color: white;
+    background-color: #95999b;
+
+}
+
+.table {
+    text-align: center;
+    margin-bottom: 30px;
+    border: 0px solid black;
+    margin: 0 20px 30px 20px;
+}
+
+.table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    padding: 12px 0;
+    font-size: 12px;
+    line-height: 12px;
+    text-align: center;
+    font-size: 15px;
+    color: #111111;
+    font-weight: 500;
+    border-top: 2px solid #28516F;
+    border-bottom: 1px solid #d5d5d5;
+    background-color: white;
+    white-space: nowrap;
+}
+
+.write {
+    float: right;
+    margin-right: 20px;
+    width: 100px;
+    height: 31px;
+    color: white;
+    background-color: #95999b;
+    border-radius: 10px;
+    border-color: transparent;
+
+}
+
+
+
+tr {
+    background: #fafafa;
+}
+
+body {
+    margin-right: 20%;
+    margin-left: 20%;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+/*.navbar {*/
+/*    background: linear-gradient(180deg, #074989, #58ACFA);*/
+
+/*}*/
+
+/*.navbar ul {*/
+/*    list-style-type: none;*/
+/*    margin: 0;*/
+/*    padding: 0;*/
+/*    display: flex;*/
+/*    !*justify-content: space-between;*!*/
+/*}*/
+
+/*.navbar li {*/
+/*    margin: 10px;*/
+/*}*/
+
+/*.navbar img {*/
+/*    max-width: 200px;*/
+/*}*/
+
+.container-fluid {
+    text-align: center;
+}
+
+.sidenav {
+    background-color: #f1f1f1;
+    padding: 20px;
+    height: 100%;
+}
+
+.sidenav a {
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+}
+
+.col-sm-8 {
+    text-align: left;
+    /*display: flex;*/
+    flex-direction: row;
+}
+
+.vmap {
+    width: 85%;
+    height: 75vh;
+}
+
+.button-container {
+    display: grid;
+    float: right;
+}
+
+.btn {
+    margin: 5px;
+    height: 50px;
+}
+
+footer {
+    background-color: #555;
+    color: white;
+    padding: 15px;
+}
+
+body, h1, h2, h3, p, ul, li, form, input, select, button {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+/* Apply a background color and text color to the body */
+body {
+    background-color: #f2f2f2;
+    font-family: Arial, sans-serif;
+}
+
+/* Style the container and center the content */
+#container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Style the form title */
+#title h3 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Style form sections and labels */
+p {
+    font-size: 16px;
+    margin: 10px 0;
+}
+
+/* Style input fields */
+input[type="text"],
+select {
+    width: 20%;
+    /*padding: 10px;*/
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+/* Style radio buttons and checkboxes */
+input[type="radio"] {
+    margin-right: 10px;
+}
+
+/* Style navigation links */
+.navbar ul {
+    list-style: none;
+}
+
+.navbar ul li {
+    display: inline;
+    margin-right: 10px;
+}

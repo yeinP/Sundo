@@ -1,0 +1,177 @@
+.title {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.searchWrap {
+    margin: 0 20px 0 20px;
+    display:block;
+    position: relative;
+    flex-direction: row; /* 기본값이 가로로 정렬이므로 생략 가능 */
+    align-items: center;
+    text-align: center;
+    background: #fafafa;
+    border: 1px solid #dddddd;
+    padding: 10px 0;
+    margin-bottom: 30px;
+}
+
+form {
+    display: block;
+}
+
+input[type='text'], input[type='date'], select[id='period'], input[type='submit'] {
+    height: 30px;
+    -webkit-appearance: none;
+    -webkit-border-radius: 0;
+    padding: 0 10px 0 10px;
+    font-size: 12px;
+    border: 1px solid #dddddd;
+    text-align: center;
+}
+input[type='date'] #date1 {
+    width: 30%;
+    margin-right: 2px;
+    margin-left: 2px;
+
+}
+
+input[type='date'] #date2 {
+    width: 100px;
+    margin-left: 2px;
+
+}
+select[id='period'] {
+    height: 32px;
+    margin-left: -3px;
+}
+
+input[type='text'] {
+    width: 50%;
+
+}
+
+input[type="submit"] {
+    /*margin-top: 30px;*/
+    width: 200px;
+    height: 31px;
+    margin-left: -3px;
+    color: white;
+    background-color: #02488f;
+
+}
+
+.table {
+    text-align: center;
+    margin-bottom: 30px;
+    border: 0px solid black;
+    /*margin: 0 20px 30px 20px;*/
+}
+
+.table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    padding: 12px 0;
+    font-size: 12px;
+    line-height: 12px;
+    text-align: center;
+    font-size: 15px;
+    color: #111111;
+    /*font-weight: 500;*/
+    border-top: 2px solid #28516F;
+    /*border-bottom: 1px solid #d5d5d5;*/
+    background-color: #dfdfdf;
+    white-space: nowrap;
+}
+
+.write {
+    float: right;
+    margin-right: 20px;
+    width: 100px;
+    height: 31px;
+    color: white;
+    background-color: #95999b;
+    border-radius: 10px;
+    border-color: transparent;
+
+}
+
+
+
+tr {
+    background: #fafafa;
+}
+
+body {
+    margin-right: 20%;
+    margin-left: 20%;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+/*.navbar {*/
+/*    background: linear-gradient(180deg, #074989, #58ACFA);*/
+
+/*}*/
+
+/*.navbar ul {*/
+/*    list-style-type: none;*/
+/*    margin: 0;*/
+/*    padding: 0;*/
+/*    display: flex;*/
+/*    !*justify-content: space-between;*!*/
+/*}*/
+
+/*.navbar li {*/
+/*    margin: 10px;*/
+/*}*/
+
+/*.navbar img {*/
+/*    max-width: 200px;*/
+/*}*/
+
+.container-fluid {
+    text-align: center;
+}
+
+.sidenav {
+    background-color: #f1f1f1;
+    padding: 20px;
+    height: 100%;
+}
+
+.sidenav a {
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+}
+
+.col-sm-8 {
+    text-align: left;
+    /*display: flex;*/
+    flex-direction: row;
+}
+
+.vmap {
+    width: 85%;
+    height: 75vh;
+}
+
+.button-container {
+    display: grid;
+    float: right;
+}
+
+.btn {
+    margin: 5px;
+    height: 50px;
+}
+
+footer {
+    background-color: #555;
+    color: white;
+    padding: 15px;
+}

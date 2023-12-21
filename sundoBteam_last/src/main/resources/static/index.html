@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>OpenLayers-vworld</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.4.3/css/ol.css">
+    <script type="text/javascript"
+            src="https://map.vworld.kr/js/vworldMapInit.js.do?version=2.0&apiKey=E968F8D8-C4D0-33B0-8F1D-392239886745&domain=http://localhost:9191/"></script>
+    <link href="/css/infoFooter.css" rel="stylesheet" type="text/css">
+    <link href="/css/info.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body>
+
+<!--<h1>-->
+<!--    <a href="/">-->
+<!--        <img src="/assets/img/choongangLogo.png" alt="메인 페이지">-->
+<!--    </a>-->
+
+<!--</h1>-->
+
+<!--<nav class="navbar">-->
+<!--    <ul>-->
+<!--        <li>-->
+<!--            <a href="/HanRiverMap/info">-->
+<!--                <img src="/assets/img/riverInfo.png" alt="하천" style="margin-top: 5%">-->
+<!--            </a>-->
+<!--        </li>-->
+<!--        <li>-->
+<!--            <a href="/HanRiverMap/info">-->
+<!--                <img src="/assets/img/riverInfo.png" alt="하천" style="margin-top: 5%">-->
+<!--            </a>-->
+<!--        </li>-->
+<!--        <li>-->
+<!--            <a href="/complaint/main">-->
+<!--                <img src="/assets/img/complaint.png" alt="민원">-->
+<!--            </a>-->
+<!--        </li>-->
+<!--        <li>-->
+<!--            <a href="/notice/list">-->
+<!--                <img src="/assets/img/notice.png" alt="공지" style="margin-top: 5%">-->
+<!--            </a>-->
+<!--        </li>-->
+<!--    </ul>-->
+<!--</nav>-->
+
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Logo</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/">Home</a></li>
+                <li><a href="/HanRiverMap/info">지도 정보</a></li>
+                <li><a href="/complaint/main">민원 게시판</a></li>
+                <li><a href="/notice/list">공지 사항</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div style="display: flex; justify-content: space-between; align-items: center; padding: 0 10px 0 10px">
+    <div>
+        <button>목록보기</button>
+        <button>지도보기</button>
+    </div>
+
+    <div>
+        <label>관측소 / 하천명
+            <input type="text">
+        </label>
+        <button>search</button>
+    </div>
+</div>
+<div class="container-fluid text-center">
+    <div class="row content">
+        <!--        <div class="col-sm-2 sidenav">-->
+
+        <!--        </div>-->
+        <div class="col-sm-8 text-left">
+            <div class="col-sm-8">
+                <div class="vmap" id="vmap">
+
+                    <div id="sidebar" style="left: -200px; display: none;">
+                        <div style="margin-top: 1%;">
+                            <button class="btn btn-success" onclick="toggleContent('rainFallInfoList')"
+                                    style="width: 45%; border: black 0.5px solid; margin-left: 1%"  id="rainFallListBtn">관측소
+                            </button>
+                            <button class="btn btn-primary" onclick="toggleContent('checkBoxList')" id="riverCheckBoxList"
+                                    style="width: 45%; border: black 0.5px solid; margin-right: 1%; float: right">하천
+                            </button>
+                        </div>
+                        <div id="sidebarContent">
+                            <div id="sidebar_rainFallInfoList">
+                                <div class="rainFalltable">
+                                    <table>
+                                        <colgroup>
+                                            <col width=0%>
+                                        </colgroup>
+                                        <thead>
+                                        <tr>
+                                            <th style="display: none">관측소코드</th>
+                                            <th>관측소</th>
+                                            <th>강수량</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="rainFallDto, stat : ${rainFallList}"
+                                            th:id="${'row_' + stat.index}">
+                                            <td th:text="${rainFallDto.rfobscd}" class="rfobscd"
+                                                style="display: none"></td>
+                                            <td><span><img src="/img/rainFall.png" height="13px"
+                                                           width="10px"></span><span style="cursor: pointer;"
+                                                                                     th:onclick="'zoomMap(' + ${rainFallDto.lon} + ',' + ${rainFallDto.lat} + ')'">[[${rainFallDto.obsnm}]]</span>
+                                            </td>
+                                            <td class="rf"></td>
+                                            <td th:text="${rainFallDto.lon}" class="lon" style="display:none;"></td>
+                                            <td th:text="${rainFallDto.lat}" class="lat" style="display:none;"></td>
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <br>
+                            <div id="sidebar_checkBoxList" class="sidebar_checkBoxList" style="display: none">
+                                <button id="toggleCheckboxList" class="btn btn-info" style="padding: 0px; width: 20px; height: 20px; border: black 3px solid;"></button>
+                                수문 카테고리
+                                <form method="post" name="check_box">
+                                    <fieldset>
+                                        <div id="checkBoxList" style="display: none;">
+                                            <ul class="soomoon-check-group">
+                                                <li id="ScA">
+                                                    <input type="checkbox" id="checkAll">
+                                                    <label for="checkAll">모두 선택/해제</label>
+                                                </li>
+
+                                                <!--                                                <li id="sr">-->
+                                                <!--                                                    <input type="checkbox" name="check" value="rf" id="seoul_river">-->
+                                                <!--                                                    <label for="seoul_river" id="srlb">서울 하천</label>-->
+                                                <!--                                                </li>-->
+                                                <!--                                                <li id="gr">-->
+                                                <!--                                                    <input type="checkbox" name="check" value="rf" id="gyeonggi_river">-->
+                                                <!--                                                    <label for="gyeonggi_river" id="grlb">경기 하천</label>-->
+                                                <!--                                                </li>-->
+                                                <li id="rf">
+                                                    <input type="checkbox" name="check" value="rf" id="allRiver">
+                                                    <label for="allRiver" id="rflb">하천</label>
+                                                </li>
+                                                <li id="ct">
+                                                    <input type="checkbox" name="check" value="cctv" id="addCctv">
+                                                    <label for="addCctv" id="cctvlb">CCTV</label>
+                                                </li>
+
+                                                <li id="rfm">
+                                                    <input type="checkbox" value="rfm" id="rainFallBtn">
+                                                    <lable for="rainFallBtn">강수량</lable>
+                                                </li>
+
+                                                <!--                                                <li id="wl">-->
+                                                <!--                                                    <input type="checkbox" value="rfm" id="waterLevelBtn">-->
+                                                <!--                                                    <lable for="waterLevelBtn">수위</lable>-->
+                                                <!--                                                </li>-->
+
+                                                <li id="d">
+                                                    <input type="checkbox" value="rfm" id="damBtn">
+                                                    <lable for="damBtn">댐</lable>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </fieldset>
+                                </form>
+
+                                <br>
+
+                                <button id="regionCheckboxListOpen" class="btn btn-warning" style="padding: 0px; width: 20px; height: 20px; border: black 3px solid;"></button> 지역 카테고리
+                                <form method="post" name="region_check_box">
+                                    <fieldset>
+                                        <div id="regionCheckBoxList" style="display: none;">
+                                            <ul class="legion-check-group">
+                                                <li id="LcA">
+                                                    <input type="checkbox" id="LegionCheckAll">
+                                                    <label for="LegionCheckAll">모두 선택/해제</label>
+                                                </li>
+
+                                                <li id="sr">
+                                                    <input type="checkbox" name="check" value="rf" id="seoul_river">
+                                                    <label for="seoul_river" id="srlb">서울 하천</label>
+                                                </li>
+                                                <li id="gr">
+                                                    <input type="checkbox" name="check" value="rf" id="gyeonggi_river">
+                                                    <label for="gyeonggi_river" id="grlb">경기 하천</label>
+                                                </li>
+
+                                                <li id="Base">
+                                                    <input type="checkbox" name="check" value="bb" id="BaseBasin">
+                                                    <label for="BaseBasin" id="Bb">표준유역</label>
+                                                </li>
+
+                                                <li id="Middle">
+                                                    <input type="checkbox" name="check" value="mb" id="MiddleBasin">
+                                                    <label for="MiddleBasin" id="Mb">중유역</label>
+                                                </li>
+                                                <li id="Small">
+                                                    <input type="checkbox" name="check" value="sm" id="SmallBasin">
+                                                    <label for="SmallBasin" id="Sb">소유역</label>
+                                                </li>
+
+                                            </ul>
+                                        </div>
+                                    </fieldset>
+                                </form>
+
+                                <br>
+
+                                <button id="MapTypeCheckBoxListOpen" class="btn btn-dark" style="padding: 0px; width: 20px; height: 20px; border: black 3px solid;"></button> 지도종류
+                                <form method="post" name="map_type_check_box">
+                                    <fieldset>
+
+                                        <div id="MapTypeCheckBoxList" style="display: none;">
+                                            <ul class="mapType-check-group">
+                                                <li>
+                                                    <input type="checkbox" name="mapType" id="whiteMap" onclick="javascript:toggleMode(vw.ol3.BasemapType.GRAPHIC_WHITE, this.checked, this.id);">
+                                                    <label for="whiteMap">백지도</label><br>
+                                                </li>
+                                                <li>
+                                                    <input type="checkbox" name="mapType" id="nightMap" onclick="javascript:toggleMode(vw.ol3.BasemapType.GRAPHIC_NIGHT, this.checked, this.id);">
+                                                    <label for="nightMap">야간지도</label><br>
+                                                </li>
+                                                <li>
+                                                    <input type="checkbox" name="mapType" id="photoMap" onclick="javascript:toggleMode(vw.ol3.BasemapType.PHOTO, this.checked, this.id);">
+                                                    <label for="photoMap">항공사진</label><br>
+                                                </li>
+                                                <li>
+                                                    <input type="checkbox" name="mapType" id="hybridMap" onclick="javascript:toggleMode(vw.ol3.BasemapType.PHOTO_HYBRID, this.checked, this.id);">
+                                                    <label for="hybridMap">하이브리드</label><br>
+                                                </li>
+
+                                            </ul>
+                                        </div>
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <button id="toggleButton" style="position: absolute; top: 10px; left: 10px;">☰</button>
+
+                </div>
+
+                <div class="button-container">
+                    <!--                    <button class="btn btn-primary" id="seoul_river">서울 하천</button>-->
+                    <!--                    <button class="btn btn-primary" id="gyeonggi_river">경기 하천</button>-->
+                    <!--                    <button class="btn btn-success" id="seoul_drainage">서울 수계</button>-->
+                    <!--                    <button class="btn btn-success" id="gyeonggi_drainage">경기 수계</button>-->
+                    <!--                    <button class="btn btn-info" type="button"-->
+                    <!--                            onclick="javascript:setMode(vw.ol3.BasemapType.PHOTO_HYBRID);">하이브리드-->
+                    <!--                    </button>-->
+                    <!--                    <button class="btn btn-info" type="button" onclick="javascript:setMode(vw.ol3.BasemapType.PHOTO);">-->
+                    <!--                        항공사진-->
+                    <!--                    </button>-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <div id="footer">
+
+        <div class="mnu">
+
+            <ul class="mn">
+                <li style="font-size: 12px"><a href="/web/guidePage/siteGuide.do">홈페이지 이용안내</a></li>
+                <li style="font-size: 12px"><a href="/web/guidePage/copyright.do">저작권 정책</a></li>
+                <li style="font-size: 12px" class="point"><a href="/web/guidePage/privacy.do">개인정보처리방침</a></li>
+                <li style="font-size: 12px"><a href="/web/guidePage/monitor.do">영상정보처리기기운영관리방침</a></li>
+                <li style="font-size: 12px"><a href="/web/guidePage/relationSite.do">관련사이트</a></li>
+                <li style="font-size: 12px"><a href="/web/guidePage/sitemap.do">사이트맵</a></li>
+                <li style="font-size: 12px"><a href="/web/aboutPage/location.do">찾아오시는길</a></li>
+            </ul>
+
+        </div>
+        <div class="main_tell_box_area">
+            <ul class="tel_padding">
+                <li class="tel_rmargin" style="display: inline-block;">대표전화 : 02 - 590 - 9999</li>
+                <li class="tel_rmargin" style="display: inline-block;">수문정보 자동응답 : 02 - 592 - 7700</li>
+                <li style="display: inline-block;">홍수통제 상황실(비상시 운영) : 02 - 590 - 9990 ~ 8</li>
+            </ul>
+        </div>
+        <div class="info">
+            <h3><a href="/"><img src="/assets/img/choongangLogo.png"></a></h3>
+            <ul style="width: 65%">
+                <li style="font-size: 12px">(06501) 서울특별시 서초구 동작대로 328 한강홍수통제소 | 대표전화 : 02-590-9999 | 수문정보자동응답(ARS) :
+                    02-592-7700
+                </li>
+                <li style="font-size: 12px">본 홈페이지는 게시된 이메일주소가 자동 수집되는것을 거부하며 이를 위반시 정보통신망법에 의해 처벌됨을 유념하여 주시기 바랍니다.</li>
+                <li style="font-size: 12px">Copyright (c) Han River Flood Control Office, All Right reserved.</li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+<!-- 모달 창 -->
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <video id="modalVideo" controls>
+            <source src="/temp/4=.m3u8" type="application/x-mpegURL">
+            <!-- Your browser does not support the video tag. -->>
+        </video>
+    </div>
+</div>
+
+<script th:src="@{/js/RiverMap/VworldMap.js}"></script>
+<script>
+    document.getElementById('toggleButton').addEventListener('click', function () {
+        var sidebar = document.getElementById('sidebar');
+        var toggleButton = document.getElementById('toggleButton');
+        if (sidebar.style.left === '-200px') {
+            sidebar.style.left = '0px';
+            sidebar.style.display = 'block';
+            toggleButton.style.left = '200px'; // 버튼을 오른쪽으로 이동
+        } else {
+            sidebar.style.left = '-200px';
+            sidebar.style.display = 'none';
+            toggleButton.style.left = '10px'; // 버튼을 왼쪽으로 이동
+        }
+    });
+</script>
+
+<!--체크박스 리스트 토글-->
+<!--<script>-->
+<!--    document.getElementById('toggleCheckboxList').addEventListener('click', function () {-->
+<!--        var checkboxList = document.getElementById('checkBoxList');-->
+<!--        checkboxList.style.display = (checkboxList.style.display === 'none' || checkboxList.style.display === '') ? 'block' : 'none';-->
+<!--    });-->
+<!--</script>-->
+
+<script>
+    document.getElementById('toggleCheckboxList').addEventListener('click', function () {
+        const checkboxList = document.getElementById('checkBoxList');
+        checkboxList.style.display = (checkboxList.style.display === 'none' || checkboxList.style.display === '') ? 'block' : 'none';
+    });
+</script>
+
+<script>
+    document.getElementById('regionCheckboxListOpen').addEventListener('click' , function(){
+        const regionCheckBoxList = document.getElementById('regionCheckBoxList');
+        regionCheckBoxList.style.display = (regionCheckBoxList.style.display === 'none' || regionCheckBoxList.style.display === '') ? 'block' : 'none';
+
+    });
+    document.getElementById('MapTypeCheckBoxListOpen').addEventListener('click' , function(){
+        console.log('11')
+        const MapTypeCheckBoxList = document.getElementById('MapTypeCheckBoxList');
+        MapTypeCheckBoxList.style.display = (MapTypeCheckBoxList.style.display === 'none' || MapTypeCheckBoxList.style.display === '') ? 'block' : 'none';
+
+    });
+
+</script>
+
+
+<!--체크박스 전체 선택/해제-->
+<script>
+    document.getElementById('checkAll').addEventListener('change', function () {
+        var checkboxes = document.querySelectorAll('.soomoon-check-group input[type="checkbox"]');
+        checkboxes.forEach(function (checkbox) {
+            checkbox.checked = document.getElementById('checkAll').checked;
+        });
+    });
+</script>
+
+<script>
+    document.getElementById('LegionCheckAll').addEventListener('change', function () {
+        var checkboxes = document.querySelectorAll('.legion-check-group input[type="checkbox"]');
+        checkboxes.forEach(function (checkbox) {
+            checkbox.checked = document.getElementById('LegionCheckAll').checked;
+        });
+    });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+<script>
+    // 모달창을 가져옵니다
+    var modal = document.getElementById("myModal");
+    var modalVideo = document.getElementById("modalVideo");
+    var btn = document.getElementById("myBtn");
+    var span = document.getElementsByClassName("close")[0];
+
+    // HLS 지원 여부 체크 및 초기화
+    function initHls(code) {
+        if (Hls.isSupported()) {
+            var hls = new Hls();
+            hls.loadSource(`/cctv/${code}.m3u8`); // M3U8 파일 경로
+            hls.attachMedia(modalVideo);
+            hls.on(Hls.Events.MANIFEST_PARSED, function() {
+                modalVideo.play();
+            });
+        } else if (modalVideo.canPlayType('application/vnd.apple.mpegurl')) {
+            modalVideo.src = `/cctv/${code}.m3u8`; // M3U8 파일 경로
+            modalVideo.addEventListener('canplay', function() {
+                modalVideo.play();
+            });
+        }
+    }
+
+    function modalClick(code,name) {
+        modal.style.display = "block";
+        document.getElementById('bridgeName').innerText = name;
+        initHls(code); // HLS 스트리밍 초기화 및 재생
+    }
+
+    span.onclick = function() {
+        modal.style.display = "none";
+        modalVideo.pause(); // 비디오 정지
+    };
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+            modalVideo.pause(); // 비디오 정지
+        }
+    };
+</script>
+<script th:inline="javascript">
+    document.addEventListener("DOMContentLoaded", function() {
+        var rainFallList = /*[[${rainFallList}]]*/ [];
+
+        function getFormattedDate() {
+            var now = new Date();
+            var year = now.getFullYear();
+            var month = (now.getMonth() + 1).toString().padStart(2, '0');
+            var day = now.getDate().toString().padStart(2, '0');
+            var hours = now.getHours().toString().padStart(2, '0');
+            var minutes = Math.floor(now.getMinutes() / 10) * 10;
+            if (minutes === 0) {
+                hours -= 1;
+                minutes = 50;
+                hours = hours.toString().padStart(2, '0');
+                minutes = minutes.toString().padStart(2, '0');
+            } else if (minutes === 10 || minutes === 20 || minutes === 30 || minutes === 40 || minutes === 50) {
+                minutes -= 10;
+                minutes = minutes.toString().padStart(2, '0');
+            }
+            return year + month + day + hours + minutes;
+
+        }
+
+        function fetchData(rfobscd) {
+            var currentDate = getFormattedDate();
+            return fetch('http://api.hrfco.go.kr/52832662-D130-4239-9C5F-730AD3BE6BC6/rainfall/list/10M/' + rfobscd + '/' + currentDate + '/' + currentDate +'.json')
+                .then(response => response.json());
+        }
+
+        var promises = rainFallList.map(rainFallDto => fetchData(rainFallDto.rfobscd));
+
+        // 모든 Promise가 완료될 때까지 기다림
+        Promise.all(promises)
+            .then(dataArray => {
+                dataArray.forEach((data, index) => {
+                    var rfobscd = rainFallList[index].rfobscd;
+                    var element = document.getElementById('row_' + index);
+                    var rfElement = element.querySelector('.rf');
+                    rfElement.innerText = data.content[0].rf.toFixed(1);
+                });
+            })
+            .catch(error => console.error('Error fetching data:', error));
+    });
+
+    function toggleContent(category) {
+        var targetDivId = 'sidebar_' + category;
+        var targetDiv = document.getElementById(targetDivId);
+        var allDivs = document.querySelectorAll('[id^="sidebar_"]');
+        allDivs.forEach(function (div) {
+            div.style.display = 'none';
+        });
+        if (targetDiv) {
+            targetDiv.style.display = 'block';
+        }
+    }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+</body>
+</html>

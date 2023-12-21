@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>용수 사용 신청서 작성</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.4.3/css/ol.css">
+    <link href="/css/infoFooter.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/complaint/step2.css}">
+</head>
+<body style="margin-right: 20%; margin-left: 20%; padding: 0;">
+
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+           
+        </div>
+    <div class="collapse navbar-collapse" id="myNavbar" style="font-size: 12px;">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/">Home</a></li>
+                <li><a href="/HanRiverMap/info">지도 정보</a></li>
+                <li><a href="/complaint/main">민원 게시판</a></li>
+                <li><a href="/approval/main">용수 신청</a></li>
+                <li><a href="/notice/list">공지 사항</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div id="container">
+    <div id="title">
+        <h3>신청인 정보 입력</h3>
+    </div>
+    <div id="content">
+        <form action="/approval/write/step3" method="post" enctype="multipart/form-data">
+            <p>[신청인 *]</p>
+            <input type="text" placeholder="이름을 입력하세요." name="a_name" id="a_name">
+            <hr/>
+            <p>[연락처]</p>
+            <p>신청 결과를 인증하신 휴대폰 번호로 보내드립니다.</p>
+            <input type="text" id="phoneInput" disabled>
+            <input type="hidden" th:value="${phone}" name="a_phone" id="hidPhone">
+            <hr/>
+            <p>[취수 위치 *]</p>
+            <select id="river" name="r_code">
+                <option value="999">---------선택---------</option>
+            </select><br>
+            <input type="text" placeholder="상세 위치" id="detailAddress" name="a_place">
+            <p>[사용 용도 *]</p>
+            <select id="purpose">
+                <option value="999">---------선택---------</option>
+                <option value="생활용">생활용수</option>
+                <option value="공업용">공업용수</option>
+                <option value="농어업용">농ㆍ어업용수</option>
+                <option value="기타">기타</option>
+            </select>
+            <input type="hidden" name="a_purpose" id="hidPurpose">
+            <input type="text" id="etc" placeholder="기타 사유 작성" disabled>
+            <hr>
+            <p>[사용 기간 *]</p>
+            <input type="date" id="date1" name="startDate" th:value="${startDate}"> ~ <input type="date" id="date2"
+                                                                                             name="endDate">
+            <hr>
+            <p>[시설용량 *]</p>
+            <input type="text" name="a_volume" id="a_volume"> ㎥/일
+            <p class="float">※ 반올림하여 소수점 둘째 자리까지 작성</p>
+            <hr>
+            <p>[신청량 *]</p>
+            <input type="text" name="a_goal" id="a_goal"> ㎥/일
+            <p class="float">※ 반올림하여 소수점 둘째 자리까지 작성</p>
+            <hr/>
+
+            <p>[작성 서류 제출]</p>
+            <ul>
+                <li>유수인용 지점 위치도</li>
+                <li>사업 계획서(취수시설 제원 포함)
+                    (기존 고객은 사업변경이 있는 경우에만 제출)
+                </li>
+                <li>수도미터 제원 및 설치위치도
+                    (기존 고객은 사업변경이 있는 경우에만 제출)
+                </li>
+            </ul>
+            <input class="upload-name" value="첨부파일" placeholder="첨부파일" readonly>
+            <label for="file">파일 첨부</label>
+            <input type="file" multiple="multiple" name="files" id="file">
+            <p>&nbsp* 서류 누락 시 신청이 반려될 수 있습니다. *</p>
+            <hr/>
+            <input type="submit" value="입력 완료" id="step2Btn">
+        </form>
+    </div>
+</div>
+
+<br>
+
+<div id="footer">
+
+    <div class="mnu">
+
+        <ul class="mn">
+            <li style="font-size: 12px"><a href="/web/guidePage/siteGuide.do">홈페이지 이용안내</a></li>
+            <li style="font-size: 12px"><a href="/web/guidePage/copyright.do">저작권 정책</a></li>
+            <li style="font-size: 12px" class="point"><a href="/web/guidePage/privacy.do">개인정보처리방침</a></li>
+            <li style="font-size: 12px"><a href="/web/guidePage/monitor.do">영상정보처리기기운영관리방침</a></li>
+            <li style="font-size: 12px"><a href="/web/guidePage/relationSite.do">관련사이트</a></li>
+            <li style="font-size: 12px"><a href="/web/guidePage/sitemap.do">사이트맵</a></li>
+            <li style="font-size: 12px"><a href="/web/aboutPage/location.do">찾아오시는길</a></li>
+        </ul>
+    </div>
+    <div class="main_tell_box_area">
+        <ul class="tel_padding">
+            <li class="tel_rmargin" style="display: inline-block;">대표전화 : 02 - 590 - 9999</li>
+            <li class="tel_rmargin" style="display: inline-block;">수문정보 자동응답 : 02 - 592 - 7700</li>
+            <li style="display: inline-block;">홍수통제 상황실(비상시 운영) : 02 - 590 - 9990 ~ 8</li>
+        </ul>
+    </div>
+    <div class="info">
+        <h3><a href="/"><img src="/assets/img/choongangLogo.png"></a></h3>
+        <ul style="width: 65%">
+            <li style="font-size: 12px">(06501) 서울특별시 서초구 동작대로 328 한강홍수통제소 | 대표전화 : 02-590-9999 | 수문정보자동응답(ARS) :
+                02-592-7700
+            </li>
+            <li style="font-size: 12px">본 홈페이지는 게시된 이메일주소가 자동 수집되는것을 거부하며 이를 위반시 정보통신망법에 의해 처벌됨을 유념하여 주시기 바랍니다.</li>
+            <li style="font-size: 12px">Copyright (c) Han River Flood Control Office, All Right reserved.</li>
+        </ul>
+    </div>
+
+</div>
+</body>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script th:src="@{/js/approval/step2.js}"></script>
+<script th:inline="javascript">
+    let select = document.getElementById('river');
+
+    let river = /*[[${riverList}]]*/ null;
+
+    for (let i = 0; i < river.length; i++) {
+        let option = document.createElement('option');
+        option.value = river[i].r_code;
+        option.textContent = river[i].r_name;
+        select.appendChild(option);
+    }
+</script>
+</html>

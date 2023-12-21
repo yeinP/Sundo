@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/notice/noticeList.css}">
+    <link href="/css/infoFooter.css" rel="stylesheet" type="text/css">
+
+</head>
+<body style="margin-right: 20%; margin-left: 20%; padding: 0;">
+
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+           
+        </div>
+    <div class="collapse navbar-collapse" id="myNavbar" style="font-size: 12px;">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/">Home</a></li>
+                <li><a href="/HanRiverMap/info">지도 정보</a></li>
+                <li><a href="/complaint/main">민원 게시판</a></li>
+                <li><a href="/approval/main">용수 신청</a></li>
+                <li><a href="/notice/list">공지 사항</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div style="min-width: 100%; margin-top: 50px;">
+    <div class="title">
+        <h2>공지 사항</h2>
+    </div>
+    <div class="searchWrap">
+        <form action="/notice/search" method="get">
+            <select name="searchType" id="searchType">
+                <option value="">선택</option>
+                <option value="no">번호</option>
+                <option value="title">제목</option>
+            </select>
+            <input type="text" name="searchKeyword">
+            <button type="button" onclick="validateAndSubmit()">검색</button>
+        </form>
+    </div>
+
+    <div class="table">
+        <div class="writeBtnArea">
+            <th:block th:if="${#session != null}">
+                <button type="button" th:onclick="|location.href='/notice/write'|">공지 작성</button>
+            </th:block>
+        </div>
+        <table>
+            <colgroup>
+                <col style="width:15%">
+                <col style="width:30%">
+                <col style="width:20%">
+                <col style="width:20%">
+                <col style="width:15%">
+            </colgroup>
+            <thead>
+            <tr>
+                <th>번호</th>
+                <th>타이틀</th>
+                <th>작성자</th>
+                <th>등록 일시</th>
+                <th>조회수</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="notice : ${noticeList}">
+                <td th:text="${notice.notice_no}"></td>
+                <td><a
+                        th:href="@{/notice/read(notice_no=${notice.notice_no}, page=${paging.page}, pageSize=${paging.pageSize})}">
+                    <span th:text="${notice.title}"></span>
+                </a></td>
+                <td th:text="${notice.writer}"></td>
+                <td th:text="${#temporals.format(notice.reg_date, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                <td th:text="${notice.view_cnt}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="pageArea">
+        <ul class="pagination pagination-sm">
+            <li>
+                <th:block th:if="${paging.isShowPrev}">
+                    <a th:href="@{/notice/list(page=${paging.beginPage - 1}, pageSize=${paging.pageSize})}">
+                        <span>&lt;</span>
+                    </a>
+                </th:block>
+            </li>
+            <li>
+                <th:block
+                        th:each="page : ${#numbers.sequence(paging.beginPage, paging.endPage)}">
+                    <a th:href="@{/notice/list(page=${page}, pageSize=${paging.pageSize})}">
+                        <span th:text="${page}"></span>
+                    </a>
+                </th:block>
+            </li>
+            <li>
+                <th:block th:if="${paging.isShowNext}">
+                    <a th:href="@{/notice/list(page=${paging.endPage + 1}, pageSize=${paging.pageSize})}">
+                        <span>&gt;</span>
+                    </a>
+                </th:block>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+<br>
+
+<div id="footer">
+
+    <div class="mnu">
+
+        <ul class="mn">
+            <li style="font-size: 12px"><a href="/web/guidePage/siteGuide.do">홈페이지 이용안내</a></li>
+            <li style="font-size: 12px"><a href="/web/guidePage/copyright.do">저작권 정책</a></li>
+            <li style="font-size: 12px" class="point"><a href="/web/guidePage/privacy.do">개인정보처리방침</a></li>
+            <li style="font-size: 12px"><a href="/web/guidePage/monitor.do">영상정보처리기기운영관리방침</a></li>
+            <li style="font-size: 12px"><a href="/web/guidePage/relationSite.do">관련사이트</a></li>
+            <li style="font-size: 12px"><a href="/web/guidePage/sitemap.do">사이트맵</a></li>
+            <li style="font-size: 12px"><a href="/web/aboutPage/location.do">찾아오시는길</a></li>
+        </ul>
+
+    </div>
+    <div class="main_tell_box_area">
+        <ul class="tel_padding">
+            <li class="tel_rmargin" style="display: inline-block;">대표전화 : 02 - 590 - 9999</li>
+            <li class="tel_rmargin" style="display: inline-block;">수문정보 자동응답 : 02 - 592 - 7700</li>
+            <li style="display: inline-block;">홍수통제 상황실(비상시 운영) : 02 - 590 - 9990 ~ 8</li>
+        </ul>
+    </div>
+    <div class="info">
+        <h3><a href="/"><img src="/assets/img/choongangLogo.png"></a></h3>
+        <ul style="width: 65%">
+            <li style="font-size: 12px">(06501) 서울특별시 서초구 동작대로 328 한강홍수통제소 | 대표전화 : 02-590-9999 | 수문정보자동응답(ARS) :
+                02-592-7700
+            </li>
+            <li style="font-size: 12px">본 홈페이지는 게시된 이메일주소가 자동 수집되는것을 거부하며 이를 위반시 정보통신망법에 의해 처벌됨을 유념하여 주시기 바랍니다.</li>
+            <li style="font-size: 12px">Copyright (c) Han River Flood Control Office, All Right reserved.</li>
+        </ul>
+    </div>
+
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="/js/notice/notice.js"></script>
+</body>
+</html>

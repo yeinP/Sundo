@@ -1,0 +1,211 @@
+.title {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.searchWrap {
+    margin: 0 0px 30px 0px;
+    display: block;
+    position: relative;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+    background: #fafafa;
+    border: 1px solid #dddddd;
+    padding: 10px 0;
+    width: 100%;
+}
+
+form {
+    display: block;
+}
+
+input[type='text'], input[type='date'], select[id='period'], input[type='submit'] {
+    height: 30px;
+    -webkit-appearance: none;
+    -webkit-border-radius: 0;
+    padding: 0 10px 0 10px;
+    font-size: 12px;
+    border: 1px solid #dddddd;
+}
+input[type='date'] #date1 {
+    width: 30%;
+    margin-right: 2px;
+    margin-left: 2px;
+
+}
+
+input[type='date'] #date2 {
+    width: 100px;
+    margin-left: 2px;
+
+}
+select[id='period'] {
+    height: 32px;
+    margin-left: -3px;
+}
+
+input[type='text'] {
+    width: 50%;
+
+}
+
+button[type="submit"] {
+    width: 50px;
+    height: 31px;
+    margin-left: 3px;
+    color: white;
+    padding: 0 10px 0 10px;
+    background-color: #8d8d8d;
+    font-size:12px;
+    border: 0px;
+}
+
+.table {
+    text-align: center;
+    border: 0px solid black;
+
+}
+
+.table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    padding: 12px 0;
+    line-height: 12px;
+    text-align: center;
+    font-size: 15px;
+    color: #111111;
+    font-weight: 500;
+    border-top: 2px solid #28516F;
+    border-bottom: 1px solid #d5d5d5;
+    background-color: white;
+    white-space: nowrap;
+}
+
+.write {
+    float: right;
+    margin-right: 20px;
+    width: 100px;
+    height: 31px;
+    color: white;
+    background-color: #95999b;
+    border-radius: 10px;
+    border-color: transparent;
+
+}
+
+
+
+tr {
+    background: #fafafa;
+}
+
+.pageArea {
+    text-align: center;
+}
+
+body {
+    margin-right: 20%;
+    margin-left: 20%;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+/*.navbar {*/
+/*    background: linear-gradient(180deg, #074989, #58ACFA);*/
+
+/*}*/
+
+/*.navbar ul {*/
+/*    list-style-type: none;*/
+/*    margin: 0;*/
+/*    padding: 0;*/
+/*    display: flex;*/
+/*    !*justify-content: space-between;*!*/
+/*}*/
+
+/*.navbar li {*/
+/*    margin: 10px;*/
+/*}*/
+
+/*.navbar img {*/
+/*    max-width: 200px;*/
+/*}*/
+
+.container-fluid {
+    text-align: center;
+}
+
+.sidenav {
+    background-color: #f1f1f1;
+    padding: 20px;
+    height: 100%;
+}
+
+.sidenav a {
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+}
+
+.col-sm-8 {
+    text-align: left;
+    /*display: flex;*/
+    flex-direction: row;
+}
+
+.vmap {
+    width: 85%;
+    height: 75vh;
+}
+
+.button-container {
+    display: grid;
+    float: right;
+}
+
+.btn {
+    margin: 5px;
+    height: 50px;
+}
+
+footer {
+    background-color: #555;
+    color: white;
+    padding: 15px;
+}
+
+#searchType{
+    height: 30px;
+    -webkit-border-radius: 0;
+    padding: 0 10px 0 10px;
+    font-size: 12px;
+    border: 1px solid #dddddd;
+    text-align: center;
+}
+
+.writeBtnArea{
+    float:right;
+    margin-bottom: 10px;
+}
+
+button[type="button"] {
+    font-family: auto;
+    font-weight: 500;
+    margin-right: 4px;
+    float: right;
+    text-align: center;
+    border-radius: 3px;
+    background: #969393;
+    border: 1px solid #969393;
+    color: white;
+    height: 30px;
+    width: 100px;
+}
+
+td {
+    padding:10px;
+}

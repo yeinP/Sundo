@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h2> this is weather page </h2>
+<button class="weatherBtn">click</button>
+<div class="print">[[url]]</div>
+<script>
+window.addEventListener("DOMContentLoaded", (event) => {
+    document.querySelector(".weatherBtn").addEventListener("click", weather);
+
+    function weather() {
+        // 현재 시간을 'yyyyMMddHHmm' 형식으로 생성
+        let currentDate = new Date();
+        let year = currentDate.getFullYear();
+        console.log("year: ", year);
+        let month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
+        console.log("month: ", month);
+        let day = currentDate.getDate().toString().padStart(2, '0');
+        console.log("day: ", day);
+        let hours = currentDate.getHours().toString().padStart(2, '0');
+        console.log("hours: ", hours);
+        let minutes = currentDate.getMinutes().toString().padStart(2, '0');
+        console.log("minutes: ", minutes);
+        let datetime = year + month + day + hours + minutes;
+        console.log("datetime: ", datetime);
+
+        // URL 생성
+        let url = `https://apihub.kma.go.kr/api/typ03/cgi/wrn/nph-wrn7?out=0&tmef=1&city=1&name=0&tm=${datetime}on=127.7&lat=36.1&range=300&size=685&wrn=W,R,C,D,O,V,T,S,Y,H,&authKey=tjD4kNMOSCqw-JDTDugq4g`;
+
+        // URL을 열고 데이터 가져오는 코드를 여기에 추가할 수 있습니다.
+        // 이 예제에서는 URL을 출력합니다.
+        console.log(url);
+        
+        let print = document.querySelector(".print");
+        print.textContent = url;
+    }
+});
+</script>
+</body>
+</html>

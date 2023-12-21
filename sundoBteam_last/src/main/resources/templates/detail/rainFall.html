@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Title</title>
+  <!--    <link rel="stylesheet" type="text/css" th:href="@{/css/river/riverDetail.css}">-->
+  <style>
+    .graph {
+      display: flow-root;
+      width: 585px;
+      background-color: aliceblue;
+      height: 350px;
+    }
+
+    #graph {
+      margin: auto;
+    }
+
+
+    .highcharts-figure{
+      background-color: #9d9d9d;
+    }
+
+
+    .searchTypeD {
+      float: left;
+      margin: 0 0 12px 0;
+      width: 100%;
+    }
+    .dampop_tabarea ul, li {
+      margin: 0;
+      padding: 0;
+      border: 0;
+      font-weight: normal;
+      font-size: 12px;
+      vertical-align: baseline;
+      word-wrap: break-word;
+      display: inline-block;
+    }
+    .dampop_tabarea {
+      float: right;
+      display: inline-block;
+    }
+    .dampop_tabarea ul li a:hover {
+      background: #004675;
+      color: #fff;
+    }
+    .dampop_tabarea ul li {
+      padding: 5px 5px 5px 5px;
+      background: #dff7ff;
+      border-right: 1px solid #e1e1e1;
+    }
+    .table {
+      padding: 40px 0 0 0;
+      float: right;
+      width: 290px;
+      height: 340px;
+    }
+    .table {
+      margin: 0 0 20px 0;
+      padding: 0 0 0 0;
+      overflow-x: hidden;
+      overflow-y: scroll;
+    }
+
+    table thead th, table thead td {
+      font-size: 12px;
+      font-weight: bold;
+      color: #004675;
+      text-align: center;
+      border-bottom: #bbe8fc 1px solid;
+      border-right:  #bbe8fc 1px solid;
+      background: #f1fbff;
+    }
+
+    table {
+      margin: 0 0 30px 0;
+      width: 100%;
+      border-top: #bbe8fc 2px solid;
+      border-bottom: #bbe8fc 1px solid;
+      background-color: #FFF;
+      font-size: 10px;
+      text-align: center;
+    }
+
+    table tbody th {
+      font-size: 10px;
+      font-weight: bold;
+      color: #004675;
+      text-align: center;
+      border-top: #bbe8fc 1px solid;
+      border-right: #bbe8fc 1px solid;
+      background: #F7FFFE;
+    }
+
+  </style>
+
+</head>
+<body style="margin-top: 4%;">
+<sapn id="rfobscd" th:text="${rfobscdInfo.get().rfobscd}" style="display:none;"></sapn>
+<div class="searchTypeD">
+  <!--    <input type="text" id = "startDate"> ~ <input type="text" id = "endDate">-->
+  <input type="date" id = "startDate"> ~ <input type="date" id = "endDate">
+  <span class="dampop_tabarea">
+    <ul class="tabarea_ul">
+        <li id="radio1" value="10M" class="dampop_il btnView"><a class="dampop_a">10분 단위</a></li>
+        <li id="radio2" value="1H" class="dampop_il btnView"><a class="dampop_a">시 단위</a></li>
+        <li id="radio3" value="1D" class="dampop_il btnView"><a class="dampop_a">일 단위</a></li>
+    </ul>
+</span>
+  <span class="search">
+        <button class="searchBtn">검색</button>
+    <!--onclick="convertAndSubmit()" -->
+    </span>
+
+</div>
+
+<input type="hidden" id="mindata" value="N">
+<div class= "px">
+  <div class="table">
+    <table id="tableTitle">
+      <colgroup>
+        <col width="42%">
+        <col width="19%">
+        <col>
+      </colgroup>
+      <thead>
+      <tr>
+        <th class="f">시간</th>
+        <th>강수량</th>
+      </tr>
+      </thead>
+      <tbody>
+
+      </tbody>
+    </table>
+  </div>
+  <div class="graph">
+    <figure class="highcharts-figure">
+      <div id="graph"></div>
+    </figure>
+  </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
+<script th:src="@{/js/complaint/highcharts.js}"></script>
+<script th:src="@{/js/complaint/modules/series-label.js}"></script>
+<script th:src="@{/js/complaint/modules/exporting.js}"></script>
+<script th:src="@{/js/complaint/modules/export-data.js}"></script>
+<script th:src="@{/js/complaint/modules/accessibility.js}"></script>
+<script th:src="@{/js/RiverMap/rainFallPopup.js}"></script>
+</body>
+</html>

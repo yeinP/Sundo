@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.4.3/css/ol.css">
+    <link href="/css/infoFooter.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/river/rainFall.css}">
+</head>
+<body style="margin-left: 0px;">
+
+
+<h2 style="text-align: center; font-weight: bold;">하천 정보</h2>
+
+<table id="riverLine" border="1">
+    <div class="title">
+        <h3>하천의 구간</h3>
+    </div>
+    <thead> 
+<!--    <tr>-->
+<!--        <th colspan="16">하천의 구간</th>-->
+<!--    </tr>-->
+    <tr>
+        <th colspan="8">기 점</th>
+        <th colspan="8">종 점</th>
+    </tr>
+    <tr>
+        <th colspan="4">위 치</th>
+        <th colspan="4">계 획</th>
+        <th colspan="4">위 치</th>
+        <th colspan="4">계 획</th>
+    </tr>
+    <tr>
+        <th>시도</th>
+        <th>시군구</th>
+        <th>읍면동</th>
+        <th>경계</th>
+        <th>빈도</th>
+        <th>홍수량(㎥/s)</th>
+        <th>홍수위(EL.m)</th>
+        <th>하폭(m)</th>
+        <th>시도</th>
+        <th>시군구</th>
+        <th>읍면동</th>
+        <th>경계</th>
+        <th>빈도</th>
+        <th>홍수량(㎥/s)</th>
+        <th>홍수위(EL.m)</th>
+        <th>하폭(m)</th>
+    </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+<hr>
+
+<table id="riverMain" border="1">
+    <div class="title">
+        <h3>유수의 계통 (수계)</h3>
+    </div>
+    <thead>
+<!--    <tr>-->
+<!--        <th colspan="7">유 수의 계 통 (수 계)</th>-->
+<!--    </tr>-->
+    <tr>
+        <th rowspan="2">본류</th>
+        <th>제 1 지류</th>
+        <th>제 2 지류</th>
+        <th>제 3 지류</th>
+        <th>제 4 지류</th>
+        <th>제 5 지류</th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+<hr>
+
+<table border="1" id="riverEx">
+    <div class="title">
+        <h3>하천 연장</h3>
+    </div>
+    <thead>
+<!--    <tr>-->
+<!--        <th colspan="4">하 천 연 장</th>-->
+<!--    </tr>-->
+    <tr>
+        <th rowspan="3">계 (km)</th>
+        <th colspan="3">하천기본계획</th>
+    </tr>
+    <tr>
+        <th colspan="2">수립 구간</th>
+        <th rowspan="2">미 수립 구간(km)</th>
+    </tr>
+    <tr>
+        <th>고시일</th>
+        <th>연장(km)</th>
+    </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+<input type="hidden" th:value="${id}" id="id">
+
+<br>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+    var id = document.getElementById('id').value;
+    // 서버에서 파일 ID를 가져오는 GET 요청 보내기
+    fetch(`/River/Info/` + id)
+        .then(response => response.text())
+        .then(jsonString => {
+
+            var jsonData = JSON.parse(jsonString);
+            const data = JSON.parse(jsonString);
+            console.log(data)
+            var addDataToTable = function (tableId, keyRange) {
+                var table = document.getElementById(tableId);
+                var tbody = table.querySelector("tbody");
+
+                jsonData.forEach(function (row) {
+                    var tableRow = tbody.insertRow();
+
+                    for (var key in row) {
+                        var keyAsNumber = parseInt(key, 10);
+                        if (!isNaN(keyAsNumber) && keyAsNumber >= keyRange[0] && keyAsNumber <= keyRange[1]) {
+                            var cell = tableRow.insertCell();
+                            cell.innerHTML = row[key];
+                        }
+                    }
+                });
+            };
+
+            addDataToTable("riverMain", [1, 6]); // 키 범위를 숫자로 지정
+            addDataToTable("riverLine", [10, 25]); // 키 범위를 숫자로 지정
+            addDataToTable("riverEx", [26, 29]); // 키 범위를 숫자로 지정
+
+        })
+        .catch(error => {
+            console.error('Error fetching file ID:', error);
+        });
+
+</script>
+
+</body>
+</html>

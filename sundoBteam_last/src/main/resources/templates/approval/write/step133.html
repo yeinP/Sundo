@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th = "http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>용수 사용 신청서 작성</title>
+</head>
+<body>
+<h2>용수 사용 신청을 위해 휴대폰 인증이 필요합니다.</h2>
+<input type="text" maxlength="3" size="3" id="p1">
+-<input type="text" maxlength = "4" size="3" id="p2">
+-<input type="text" maxlength = "4" size="3"id="p3">
+<button id = "send">인증번호 전송</button><br>
+<input type="text" placeholder="인증번호를 입력하세요." id="signNum"><button id = "check">인증</button><br>
+<div id = "nextBtn" style="display: none">
+<form action ="/approval/write/step2" method="get">
+	<input type = "hidden" id = "hidPhone" name = "phone">
+	<input type = "submit" value = "인증 완료"/>
+</form>
+</div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<script th:src="@{/js/approval/step1.js}"></script>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>Rainfall List</h2>
+
+<table>
+    <thead>
+    <tr>
+        <th>관측소코드</th>
+        <th>관측소</th>
+        <th>강수량</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="rainFallDto, stat : ${rainFallList}" th:id="${'row_' + stat.index}">
+        <td th:text="${rainFallDto.rfobscd}" class="rfobscd"></td>
+        <td th:text="${rainFallDto.obsnm}"></td>
+        <td class="rf"></td>
+    </tr>
+
+    </tbody>
+</table>
+<script th:inline="javascript">
+    document.addEventListener("DOMContentLoaded", function() {
+        var rainFallList = /*[[${rainFallList}]]*/ [];
+
+        function getFormattedDate() {
+            var now = new Date();
+            var year = now.getFullYear();
+            var month = (now.getMonth() + 1).toString().padStart(2, '0');
+            var day = now.getDate().toString().padStart(2, '0');
+            var hours = now.getHours().toString().padStart(2, '0');
+            var minutes = Math.floor(now.getMinutes() / 10) * 10;
+            if (minutes === 0) {
+                hours -= 1;
+                minutes = 50;
+            } else if (minutes === 10 || minutes === 20 || minutes === 30 || minutes === 40 || minutes === 50) {
+                minutes -= 10;
+            }
+            return year + month + day + hours + minutes;
+        }
+
+        function fetchData(rfobscd) {
+            var currentDate = getFormattedDate();
+            console.log(currentDate);
+            return fetch('http://api.hrfco.go.kr/52832662-D130-4239-9C5F-730AD3BE6BC6/rainfall/list/10M/' + rfobscd + '/' + currentDate + '/' + currentDate +'.json')
+                .then(response => response.json());
+        }
+
+        var promises = rainFallList.map(rainFallDto => fetchData(rainFallDto.rfobscd));
+
+        // 모든 Promise가 완료될 때까지 기다림
+        Promise.all(promises)
+            .then(dataArray => {
+                dataArray.forEach((data, index) => {
+                    var rfobscd = rainFallList[index].rfobscd;
+                    var element = document.getElementById('row_' + index);
+                    var rfElement = element.querySelector('.rf');
+                    rfElement.innerText = data.content[0].rf.toFixed(1);
+                });
+            })
+            .catch(error => console.error('Error fetching data:', error));
+    });
+</script>
+</body>
+</html>

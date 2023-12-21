@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html xmlns:th = "http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>민원 작성</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/complaint/step1.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/complaint/main.css}">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.4.3/css/ol.css">
+	<script type="text/javascript"
+			src="https://map.vworld.kr/js/vworldMapInit.js.do?version=2.0&apiKey=E968F8D8-C4D0-33B0-8F1D-392239886745&domain=http://localhost:9191/"></script>
+	<link href="/css/infoFooter.css" rel="stylesheet" type="text/css">
+</head>
+<body style="margin-right: 20%; margin-left: 20%; padding: 0;">
+<nav class="navbar navbar-inverse">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+
+		</div>
+		<div class="collapse navbar-collapse" id="myNavbar">
+			<ul class="nav navbar-nav">
+				<li class="active"><a href="/">Home</a></li>
+				<li><a href="/HanRiverMap/info">지도 정보</a></li>
+				<li><a href="/complaint/main">민원 게시판</a></li>
+				<li><a href="/approval/main">용수 신청</a></li>
+				<li><a href="/notice/list">공지 사항</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+			</ul>
+		</div>
+	</div>
+</nav>
+
+	<div id="container">
+		<div id="content">
+			<div id="title">
+				<h3>민원 신청</h3>
+			</div>
+			<div id="contentDetail">
+			<span class="alert">민원글 작성을 위해 휴대폰 인증이 필요합니다.</span>
+			<article id="agreeTxt">
+				<div class="titBox">
+					<h4>개인 정보 수집 및 이용 안내</h4>
+				</div>
+				<div class="agr_box">
+					<div class="agr_pt" tabindex="0">
+						<dl>
+							<dt>1. 개인정보의 수집 및 이용 목적(「개인정보 보호법」 제15조)</dt>
+							<dd> 관계법령 등에서 정하는 소관 업무의 수행을 위하여 다음과 같이 개인정보를 수집 및 이용합니다. 수집된 개인정보는 정해진 목적 이외의 용도로는 이용되지 않으며 수집 목적이 변경될 경우 사전에 알리고 동의를 받을 예정입니다.<br>
+								<ul>
+									<li>
+										가. 접수·처리·사후관리 서비스 제공<br>
+										신청서에 포함된 개인정보는 민원의 접수·처리 등 소관 업무 수행을 위해 행정기관에서 이용합니다.<br>
+									</li>
+									<li>
+										나. 타 행정·공공기관 시스템 이용<br>
+										민원의 전자적 처리를 위해 내부적으로 타 시스템 연계 및 이용 시 개인정보를 이용합니다.
+									</li>
+									<li>
+										다. 정책지원<br>
+										접수된 민원은 서비스 향상 및 정책평가를 위하여 관계 법령에 따라 분석·평가 및 처리결과의 사후관리를 시행합니다.
+									</li>
+								</ul>
+							</dd>
+						</dl>
+
+						<dl>
+							<dt>2. 수집하는 개인정보의 항목(「개인정보 보호법」 제15조)</dt>
+							<dd>
+								<ul>
+									<li>가. 공통(민원/제안/예산낭비신고) 개인정보 항목</li>
+									<li> 성명, 휴대전화번호
+									</li>
+
+									<li>나. 자동수집항목: IP(Internet Protocol)주소, 이용내용의 기록
+									</li>
+									<li>나. 민원<br>
+										- 필수 : 피신고자정보(성명‧연락처, 갑질 피해 또는 제보‧고발성 민원의 경우)<br>
+									</li>
+								</ul>
+							</dd>
+						</dl>
+
+						<dl>
+							<dt>3. 개인정보의 보유 및 이용기간(「공공기록물 관리에 관한 법률 시행령」 제26조)</dt>
+							<dd>
+								원칙적으로 개인정보 보존기간이 경과하거나, 처리목적이 달성된 경우에는 지체 없이 개인정보를 파기합니다. 다만, 다른 법령에 따라 보존하여야 하는 경우에는 그러하지 않을 수 있습니다.
+								<ul>
+									<li>가. 민원, 국민제안, 예산낭비신고 등 : 10년</li>
+									<li>나. 고충민원 : 30년</li>
+									<li>다. 회원정보 : 탈퇴 즉시 파기</li>
+								</ul>
+							</dd>
+						</dl>
+
+						<dl>
+							<dt>4. 동의를 거부할 권리가 있다는 사실 및 동의 거부에 따른 불이익 내용(「개인정보 보호법」 제16조)</dt>
+							<dd>개인정보 수집·이용에 동의를 거부하실 수 있으며, 동의를 거부하시는 경우에는 국민신문고 서비스 이용이 제한됩니다.</dd>
+						</dl>
+					</div>
+					<div class="agree_sel">
+						<label for="agree" class="agree_check" title="개인 정보 수집 및 이용에 동의">
+							<input type="checkbox" id="agree">필수항목 동의
+						</label>
+					</div>
+				</div>
+			</article>
+				<div class="titBox slideTit">
+					<h4>본인 인증</h4>
+				</div>
+				<div class="sign">
+					<ul class="phoneNum">
+						<li>
+						<span class="inputNum">
+							<input type="text" maxlength="3" size="3" id="p1">
+						</span>
+						</li>
+						<li>-</li>
+						<li>
+						<span class="inputNum">
+							<input type="text" maxlength="4" size="3" id="p2">
+						</span>
+						<li>
+						<li>-</li>
+						<li>
+						<span class="inputNum">
+							<input type="text" maxlength="4" size="3" id="p3">
+						</span>
+						</li>
+						<li>
+						<span class="send">
+							<button id="send">인증번호 전송</button>
+						</span>
+						</li>
+					</ul>
+					<div class="signCo">
+						<ul class="checkCo">
+							<li>
+								<input type="text" placeholder="인증번호를 입력하세요." id="signNum">
+							</li>
+							<li>
+								<button id="check">인증</button>
+							</li>
+						</ul>
+						<div id="nextBtn" style="display: none">
+							<form action="/complaint/write/step2" method="post">
+								<input type="hidden" id="hidPhone" name="phone">
+								<input type="submit" value="인증 완료" id="toStep2"/>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+<br>
+
+<div id="footer">
+
+	<div class="mnu">
+
+		<ul class="mn">
+			<li style="font-size: 12px"><a href="/web/guidePage/siteGuide.do">홈페이지 이용안내</a></li>
+			<li style="font-size: 12px"><a href="/web/guidePage/copyright.do">저작권 정책</a></li>
+			<li style="font-size: 12px" class="point"><a href="/web/guidePage/privacy.do">개인정보처리방침</a></li>
+			<li style="font-size: 12px"><a href="/web/guidePage/monitor.do">영상정보처리기기운영관리방침</a></li>
+			<li style="font-size: 12px"><a href="/web/guidePage/relationSite.do">관련사이트</a></li>
+			<li style="font-size: 12px"><a href="/web/guidePage/sitemap.do">사이트맵</a></li>
+			<li style="font-size: 12px"><a href="/web/aboutPage/location.do">찾아오시는길</a></li>
+		</ul>
+	</div>
+	<div class="main_tell_box_area">
+		<ul class="tel_padding">
+			<li class="tel_rmargin" style="display: inline-block;">대표전화 : 02 - 590 - 9999</li>
+			<li class="tel_rmargin" style="display: inline-block;">수문정보 자동응답 : 02 - 592 - 7700</li>
+			<li style="display: inline-block;">홍수통제 상황실(비상시 운영) : 02 - 590 - 9990 ~ 8</li>
+		</ul>
+	</div>
+	<div class="info">
+		<h3><a href="/"><img src="/assets/img/choongangLogo.png"></a></h3>
+		<ul style="width: 65%">
+			<li style="font-size: 12px">(06501) 서울특별시 서초구 동작대로 328 한강홍수통제소 | 대표전화 : 02-590-9999   |   수문정보자동응답(ARS) : 02-592-7700</li>
+			<li style="font-size: 12px">본 홈페이지는 게시된 이메일주소가 자동 수집되는것을 거부하며 이를 위반시 정보통신망법에 의해 처벌됨을 유념하여 주시기 바랍니다.</li>
+			<li style="font-size: 12px">Copyright (c) Han River Flood Control Office,  All Right reserved.</li>
+		</ul>
+	</div>
+
+</div>
+
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script th:src="@{/js/complaint/step1.js}"></script>
+</html>

@@ -1,0 +1,183 @@
+#container {
+    margin :auto;
+}
+#title {
+    margin: auto;
+}
+#title h3 {
+    /*float: left;*/
+    margin: 31px 0 0 0;
+    padding: 0 9px 0 9px;
+    height: 33px;
+    font-size: 21px;
+    font-weight: bold;
+    color: #0368ce;
+    border-bottom: #0368ce 1px solid;
+}
+
+#contentDetail{
+    clear: both;
+}
+
+#content {
+    clear: both;
+    position: relative;
+    padding: 1px 0 92px 0;
+    width: 665px;
+    min-height: 570px;
+    z-index: 1;
+    margin: auto;
+}
+
+.titBox {
+    width: 50%;
+    margin-left: 25%;
+    margin-top: 5px;
+    padding: 10px 15px;
+    background: #f4f5f9;
+    border-top: 1px solid #c4c9ce;
+}
+.titBox h4 {
+    font-size: 12px;
+    margin: auto;
+}
+#agreeTxt {
+    margin-top:20px;
+}
+
+.agr_box .agr_pt dl dt, .agr_box .agr_pt dl dd {
+    margin-bottom: 5px;
+    word-break: keep-all;
+}
+.agr_box .agr_pt ul li {
+    margin-bottom: 8px;
+    line-height: 12px;
+    word-break: keep-all;
+}
+.agr_box .agr_pt {
+    font-size:10px;
+    border-bottom: 1px solid #000;
+    padding: 10px;
+    height: 150px;
+    overflow-y: auto;
+    line-height: 18px;
+}
+
+.agr_box .agr_pt dl:first-child {
+    margin-top: 0;
+}
+
+dd {
+    display: block;
+    margin-inline-start: 40px;
+}
+
+
+.agree_sel {
+    font-weight: bolder;
+    margin: 10px 0 20px;
+    text-align: center;
+    font-size:12px;
+}
+
+#agree {
+    vertical-align: -3px;
+    margin-right: 5px;
+    font-size: 13px;
+
+}
+
+.alert {
+    padding-left: 10px;
+    height: 39px;
+    font-weight: bold;
+    font-size : 12px;
+    color: #0368ce;
+}
+
+.phoneNum {
+    display: inline-block;
+    margin-top: 5px;
+    text-align: center;
+    margin-bottom: 1px;
+}
+
+.phoneNum li {
+    overflow: hidden;
+    float : left;
+}
+
+.sign {
+    text-align: center;
+    margin-top: 20px;
+}
+.sign .inputNum {
+    text-align: center;
+    letter-spacing: 8px;
+    height: 50px;
+    padding: 3px 3px 0;
+    background: #fff;
+}
+
+.sign .inputNum input {
+    border: 1px solid gainsboro;
+    text-align: -webkit-center;
+    height: 30px;
+    width: 70px;
+    font-size: 12px;
+    color: #9d9d9d;
+}
+
+.sign .send  {
+    text-align: center;
+    height: 50px;
+    padding: 5px 5px 0;
+    background: #fff;
+
+}
+
+.sign .send #send, #check {
+    border: 1px solid darkgray;
+    text-align: center;
+    height: 33px;
+    width: 100px;
+    font-size: 12px;
+    color: #000;
+}
+
+#signNum {
+    border: 1px solid gainsboro;
+    height: 30px;
+    color: #9d9d9d;
+    text-align: -webkit-center;
+    font-size: 12px;
+    width: 245px;
+    margin-right: 9px;
+}
+.checkCo {
+    display: inline-block;
+    margin-top: 5px;
+    text-align: center;
+}
+
+.checkCo li {
+    list-style: none;
+    overflow: hidden;
+    float : left;
+}
+
+#nextBtn submit {
+    margin-top: 50px;
+    border: 1px solid darkgray;
+    text-align: center;
+    height: 33px;
+    /* margin: auto; */
+    width: 250px;
+    font-size: 12px;
+    color: #fff;
+    background-color: #003b90;
+}
+
+.submit {
+    width: 100px
+}
