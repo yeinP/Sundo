@@ -1,5 +1,4 @@
 # SUNDO 수자원 관리 시스템
-![스크린샷 2023-12-23 001531](https://github.com/yeinP/Sundo/assets/145302541/8de330d2-3322-4906-b219-26c69409696d)
 ![스크린샷 2023-12-23 001531](https://github.com/yeinP/Sundo/assets/145302541/c85d161f-6940-48fc-838a-f6c5b2e993ce)
 ![스크린샷 2023-12-23 001843](https://github.com/yeinP/Sundo/assets/145302541/0e61c44e-bfcc-4389-85bc-9f8c1b2fa4f4)
 ![스크린샷 2023-12-23 001848](https://github.com/yeinP/Sundo/assets/145302541/2f8a75c1-d46d-47c3-9bb8-1354920d1638)
